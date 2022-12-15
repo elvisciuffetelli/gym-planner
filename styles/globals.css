@@ -1,26 +1,54 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,main, html {
+  width: 100%;
+  height: 100%;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+h1 {
+  @apply lg:text-7xl text-5xl;
 }
 
-* {
-  box-sizing: border-box;
+h2 {
+  @apply lg:text-6xl text-4xl;
 }
 
-@media (prefers-color-scheme: dark) {
+h3 {
+  @apply lg:text-4xl text-3xl;
+}
+
+h4 {
+  @apply lg:text-2xl text-xl;
+}
+
+h5 {
+  @apply lg:text-lg text-base;
+}
+
+h6 {
+  @apply lg:text-base text-sm;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-semibold;
+}
+
+@layer base {
   html {
-    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
   }
-  body {
-    color: white;
-    background: black;
+}
+
+@layer utilities {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
+}
+
+.disable-scroll {
+  @apply touch-none;
 }
