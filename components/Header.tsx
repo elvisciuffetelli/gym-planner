@@ -1,17 +1,17 @@
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
-import Link from "next/link";
-import { useAuthentication } from "../customHooks/useAuthentication";
-import { deleteCookie } from "../utils";
-import { useRouter } from "next/router";
-import { FaHome } from "react-icons/fa";
+import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
+import Link from 'next/link'
+import { useAuthentication } from '../customHooks/useAuthentication'
+import { deleteCookie } from '../utils'
+import { useRouter } from 'next/router'
+import { FaHome } from 'react-icons/fa'
 
 function Header() {
-  const router = useRouter();
-  const { user } = useAuthentication();
+  const router = useRouter()
+  const { user } = useAuthentication()
   const onLogout = () => {
-    deleteCookie("user");
-    router.push("/login");
-  };
+    deleteCookie('user')
+    router.push('/login')
+  }
 
   return (
     <header className="flex justify-between shadow-md">
@@ -43,7 +43,7 @@ function Header() {
         )}
       </ul>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header

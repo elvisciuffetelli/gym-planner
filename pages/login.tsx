@@ -1,15 +1,15 @@
-import { Formik } from "formik";
-import { login } from "../api/users";
-import Button from "../components/Button";
-import * as Yup from "yup";
+import { Formik } from 'formik'
+import { login } from '../api/users'
+import Button from '../components/Button'
+import * as Yup from 'yup'
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
+  email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
-    .min(5, "Too Short!")
-    .max(12, "Too Long!")
-    .required("Required"),
-});
+    .min(5, 'Too Short!')
+    .max(12, 'Too Long!')
+    .required('Required'),
+})
 
 function Login() {
   return (
@@ -21,11 +21,11 @@ function Login() {
 
       <section className="form">
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ email: '', password: '' }}
           validationSchema={LoginSchema}
           onSubmit={(values, { setSubmitting }) => {
-            login(values);
-            setSubmitting(false); //move in callback
+            login(values)
+            setSubmitting(false) //move in callback
           }}
         >
           {({
@@ -64,7 +64,7 @@ function Login() {
         </Formik>
       </section>
     </>
-  );
+  )
 }
 
-export default Login;
+export default Login

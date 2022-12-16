@@ -1,9 +1,9 @@
-import "../styles/globals.css";
-import Layout from "../components/Layout";
-import { SWRConfig } from "swr";
-import type { AppProps } from "next/app";
-import { fetcher } from "../api/request";
-import Header from "../components/Header";
+import '../styles/globals.css'
+import Layout from '../components/Layout'
+import { SWRConfig } from 'swr'
+import type { AppProps } from 'next/app'
+import { fetcher } from '../api/request'
+import Header from '../components/Header'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -18,5 +18,5 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Layout>
     </SWRConfig>
-  );
+  )
 }

@@ -1,19 +1,19 @@
-import { Formik } from "formik";
-import { register } from "../api/users";
-import Button from "../components/Button";
-import * as Yup from "yup";
+import { Formik } from 'formik'
+import { register } from '../api/users'
+import Button from '../components/Button'
+import * as Yup from 'yup'
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
-    .min(1, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+    .min(1, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
-    .min(5, "Too Short!")
-    .max(12, "Too Long!")
-    .required("Required"),
-});
+    .min(5, 'Too Short!')
+    .max(12, 'Too Long!')
+    .required('Required'),
+})
 
 function Register() {
   return (
@@ -25,11 +25,11 @@ function Register() {
 
       <section className="form">
         <Formik
-          initialValues={{ name: "", email: "", password: "" }}
+          initialValues={{ name: '', email: '', password: '' }}
           validationSchema={SignupSchema}
           onSubmit={(values, { setSubmitting }) => {
-            register(values);
-            setSubmitting(false); //move in callback
+            register(values)
+            setSubmitting(false) //move in callback
           }}
         >
           {({
@@ -75,7 +75,7 @@ function Register() {
         </Formik>
       </section>
     </>
-  );
+  )
 }
 
-export default Register;
+export default Register

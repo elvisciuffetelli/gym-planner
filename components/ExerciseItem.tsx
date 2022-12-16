@@ -1,17 +1,17 @@
-import { deleteExercise } from "../api/exercises";
-import { Exercise } from "../types";
-import Button from "./Button";
-import { FaMinus, FaEdit } from "react-icons/fa";
-import { useState } from "react";
-import { Formik } from "formik";
+import { deleteExercise } from '../api/exercises'
+import { Exercise } from '../types'
+import Button from './Button'
+import { FaMinus, FaEdit } from 'react-icons/fa'
+import { useState } from 'react'
+import { Formik } from 'formik'
 
 type Props = {
-  exercise: Exercise;
-  onExerciseDeleted: () => void;
-};
+  exercise: Exercise
+  onExerciseDeleted: () => void
+}
 
 function ExerciseItem({ exercise, onExerciseDeleted }: Props) {
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(false)
 
   return (
     <div className="flex flex-col bg-slate-200 m-4 p-4 shadow-md">
@@ -20,11 +20,11 @@ function ExerciseItem({ exercise, onExerciseDeleted }: Props) {
         <Formik
           initialValues={{ sets: 3, reps: 5, weight: 1 }}
           validate={(values) => {
-            const errors = {};
-            return errors;
+            const errors = {}
+            return errors
           }}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
+            console.log(values)
           }}
         >
           {({
@@ -76,8 +76,8 @@ function ExerciseItem({ exercise, onExerciseDeleted }: Props) {
                 roundedFull
                 size="small"
                 onClick={() => {
-                  setEditMode(!editMode);
-                  editMode && submitForm();
+                  setEditMode(!editMode)
+                  editMode && submitForm()
                 }}
               >
                 <FaEdit />
@@ -94,14 +94,14 @@ function ExerciseItem({ exercise, onExerciseDeleted }: Props) {
           roundedFull
           size="small"
           onClick={() => {
-            deleteExercise(exercise._id, onExerciseDeleted);
+            deleteExercise(exercise._id, onExerciseDeleted)
           }}
         >
           <FaMinus />
         </Button>
       </div>
     </div>
-  );
+  )
 }
 
-export default ExerciseItem;
+export default ExerciseItem

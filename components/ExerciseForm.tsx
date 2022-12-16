@@ -1,10 +1,10 @@
-import { Formik } from "formik";
-import Button from "./Button";
-import { setExercise } from "../api/exercises";
+import { Formik } from 'formik'
+import Button from './Button'
+import { setExercise } from '../api/exercises'
 
 type Props = {
-  onExerciseSet: () => void;
-};
+  onExerciseSet: () => void
+}
 
 function ExerciseForm({ onExerciseSet }: Props) {
   return (
@@ -15,14 +15,14 @@ function ExerciseForm({ onExerciseSet }: Props) {
 
       <section className="form">
         <Formik
-          initialValues={{ name: "" }}
+          initialValues={{ name: '' }}
           validate={(values) => {
-            const errors = {};
+            const errors = {}
 
-            return errors;
+            return errors
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setExercise(values, onExerciseSet, setSubmitting);
+            setExercise(values, onExerciseSet, setSubmitting)
           }}
         >
           {({ values, errors, handleChange, handleSubmit, isSubmitting }) => (
@@ -52,7 +52,7 @@ function ExerciseForm({ onExerciseSet }: Props) {
         </Formik>
       </section>
     </>
-  );
+  )
 }
 
-export default ExerciseForm;
+export default ExerciseForm

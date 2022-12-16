@@ -1,19 +1,19 @@
-import { useEffect } from "react";
-import { useGetExercise } from "../api/exercises";
-import { useAuthentication } from "../customHooks/useAuthentication";
-import { Exercise } from "../types";
-import ExerciseForm from "./ExerciseForm";
-import ExerciseItem from "./ExerciseItem";
+import { useEffect } from 'react'
+import { useGetExercise } from '../api/exercises'
+import { useAuthentication } from '../customHooks/useAuthentication'
+import { Exercise } from '../types'
+import ExerciseForm from './ExerciseForm'
+import ExerciseItem from './ExerciseItem'
 
 function Dashboard() {
-  const { user } = useAuthentication({ redirectTo: "/login" });
-  console.log({ user });
-  const { data, error, isLoading, mutate } = useGetExercise();
+  const { user } = useAuthentication({ redirectTo: '/login' })
+  console.log({ user })
+  const { data, error, isLoading, mutate } = useGetExercise()
 
   useEffect(() => {
-    console.log({ dataInEffect: data });
-  }, [data]);
-  if (!user) return <></>;
+    console.log({ dataInEffect: data })
+  }, [data])
+  if (!user) return <></>
 
   return (
     <>
@@ -40,7 +40,7 @@ function Dashboard() {
         )}
       </section>
     </>
-  );
+  )
 }
 
-export default Dashboard;
+export default Dashboard
