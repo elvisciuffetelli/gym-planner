@@ -24,8 +24,7 @@ function Login() {
           initialValues={{ email: '', password: '' }}
           validationSchema={LoginSchema}
           onSubmit={(values, { setSubmitting }) => {
-            login(values)
-            setSubmitting(false) //move in callback
+            login(values, setSubmitting)
           }}
         >
           {({
@@ -41,6 +40,7 @@ function Login() {
               className="flex flex-col space-y-4 max-w-md mx-auto"
             >
               <input
+                className="w-full border-slate-200 rounded-md"
                 type="email"
                 placeholder="email"
                 name="email"
@@ -51,6 +51,7 @@ function Login() {
                 <p className="text-red-600">{errors.email}</p>
               )}
               <input
+                className="w-full border-slate-200 rounded-md"
                 type="password"
                 name="password"
                 placeholder="password"
@@ -60,7 +61,13 @@ function Login() {
               {errors.password && touched.password && (
                 <p className="text-red-600">{errors.password}</p>
               )}
-              <Button type="submit" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                loading={isSubmitting}
+                color="primary"
+                className="w-48"
+              >
                 Login
               </Button>
             </form>

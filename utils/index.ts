@@ -1,7 +1,8 @@
 import Cookies from 'universal-cookie'
 import { CookieGetOptions, CookieSetOptions } from 'universal-cookie'
-import { isClient } from './constants'
 import Router from 'next/router'
+import toast from 'react-hot-toast'
+import { colors } from '../styles/variables'
 
 export function setCookie(
   name: string,
@@ -39,5 +40,20 @@ export function redirect(href: string, options?: {}) {
     return window.location.assign(href)
   } else {
     Router.push(href, options)
+  }
+}
+
+export function showToast(message: string, type: 'success' | 'error') {
+  switch (type) {
+    case 'success':
+      toast.success(message)
+      break
+    case 'error':
+      toast.error(message, {
+        style: { backgroundColor: colors.red, color: '#fff' },
+      })
+      break
+    default:
+      toast.success(message)
   }
 }

@@ -24,7 +24,7 @@ function Dashboard() {
 
       <ExerciseForm onExerciseSet={() => mutate()} />
 
-      <section className="">
+      <section className="pb-4">
         {data?.length > 0 ? (
           <div className="">
             {data.map((exercise: Exercise) => (

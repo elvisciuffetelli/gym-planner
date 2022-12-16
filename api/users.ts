@@ -1,8 +1,11 @@
 import { Login } from '../types'
-import { redirect, setCookie } from '../utils'
+import { redirect, setCookie, showToast } from '../utils'
 import request from './request'
 
-export function login(body: { email: string; password: string }) {
+export function login(
+  body: { email: string; password: string },
+  setSubmitting: (isSubmitting: boolean) => void
+) {
   request<Login>('post', `/api/users/login`, body)
     .then((res) => {
       if (res.token) {
@@ -10,8 +13,11 @@ export function login(body: { email: string; password: string }) {
         redirect('/')
       }
     })
-    .catch(() => {
-      throw new Error('Si è verificato un errore, riprova')
+    .catch(({ error }) => {
+      showToast(error, 'error')
+    })
+    .finally(() => {
+      setSubmitting(false)
     })
 }
 

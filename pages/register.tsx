@@ -45,6 +45,7 @@ function Register() {
               className="flex flex-col space-y-4 max-w-md mx-auto"
             >
               <input
+                className="w-full border-slate-200 rounded-md"
                 type="text"
                 placeholder="name"
                 name="name"
@@ -52,6 +53,7 @@ function Register() {
                 value={values.name}
               />
               <input
+                className="w-full border-slate-200 rounded-md"
                 type="email"
                 placeholder="email"
                 name="email"
@@ -62,6 +64,7 @@ function Register() {
                 <p className="text-red-600">{errors.email}</p>
               )}
               <input
+                className="w-full border-slate-200 rounded-md"
                 type="password"
                 name="password"
                 placeholder="password"
@@ -71,7 +74,12 @@ function Register() {
               {errors.password && touched.password && (
                 <p className="text-red-600">{errors.password}</p>
               )}
-              <Button type="submit" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                color="primary"
+                className="w-48"
+              >
                 Register
               </Button>
             </form>

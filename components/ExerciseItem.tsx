@@ -19,8 +19,8 @@ function ExerciseItem({
   const [editMode, setEditMode] = useState(false)
 
   return (
-    <div className="flex flex-col bg-slate-100 m-4 p-4 shadow-md">
-      <div className="flex justify-between">
+    <div className="flex flex-col bg-slate-100 shadow-md mx-2 my-6 rounded">
+      <div className="flex justify-between mb-2 pt-2 px-2">
         <h4>{exercise?.name}</h4>
         <Button
           className="w-[30px] h-[30px] flex justify-center items-center	"
@@ -38,11 +38,7 @@ function ExerciseItem({
 
       <section className="form">
         <Formik
-          initialValues={{ sets: 3, reps: 5, weight: 1 }}
-          validate={(values) => {
-            const errors = {}
-            return errors
-          }}
+          initialValues={{ sets: 0, reps: 0, weight: 0 }}
           onSubmit={(values, { setSubmitting }) => {
             console.log(values)
             editExercise(exercise._id, values, onExerciseEdited)
@@ -56,54 +52,54 @@ function ExerciseItem({
             submitForm,
             isSubmitting,
           }) => (
-            <form onSubmit={handleSubmit} className="">
+            <form
+              onSubmit={handleSubmit}
+              className="flex justify-between py-4 px-2"
+            >
               {editMode ? (
-                <>
-                  <div className="flex justify-between px-8 py-2">
-                    <label htmlFor="sets">Sets</label>
+                <div className="flex">
+                  <div className="flex justify-between items-center	">
+                    <label htmlFor="sets">Sets:</label>
                     <input
-                      className="w-14 focus:ring-slate-200 focus:border-slate-200 focus:shadow-outline border-none"
+                      className="w-10 focus:ring-slate-200 focus:border-slate-200 focus:shadow-outline border-none"
                       type="number"
-                      placeholder="Sets"
                       name="sets"
                       onChange={handleChange}
                       value={values.sets}
                     />
                   </div>
 
-                  <div className="flex justify-between px-8 py-2">
-                    <label htmlFor="reps">Reps</label>
+                  <div className="flex justify-between items-center	">
+                    <label htmlFor="reps">Reps:</label>
                     <input
-                      className="w-14 focus:ring-slate-200 focus:border-slate-200 focus:shadow-outline border-none"
+                      className="w-12 focus:ring-slate-200 focus:border-slate-200 focus:shadow-outline border-none"
                       type="number"
-                      placeholder="Reps"
                       name="reps"
                       onChange={handleChange}
                       value={values.reps}
                     />
                   </div>
 
-                  <div className="flex justify-between px-8 py-2">
-                    <label htmlFor="weight">Weight</label>
+                  <div className="flex justify-between items-center	">
+                    <label htmlFor="weight">Weight:</label>
                     <input
                       className="w-14 focus:ring-slate-200 focus:border-slate-200 focus:shadow-outline border-none"
                       type="number"
-                      placeholder="Weight"
                       name="weight"
                       onChange={handleChange}
                       value={values.weight}
                     />
                   </div>
-                </>
+                </div>
               ) : (
                 <>
-                  <p className="px-2">Sets: {exercise.sets}</p>
-                  <p className="px-2">Reps: {exercise.reps}</p>
-                  <p className="px-2">Weight: {exercise.weight}</p>
+                  <p className="px-2 py-2">Sets: {exercise.sets}</p>
+                  <p className="px-2 py-2">Reps: {exercise.reps}</p>
+                  <p className="px-2 py-2">Weight: {exercise.weight}</p>
                 </>
               )}
               <Button
-                className="w-[30px] h-[30px] flex justify-center items-center"
+                className="w-[30px] h-[30px] flex justify-center items-center self-end"
                 noShadow
                 roundedFull
                 size="small"

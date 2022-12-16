@@ -52,5 +52,6 @@ export default function request<T = {}>(
         }
       })
       .catch((err) => reject(err))
+      .catch((err) => reject(err))
   })
 }

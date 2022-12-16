@@ -7,7 +7,7 @@ type Props = {
 }
 
 const ExerciseSchema = Yup.object().shape({
-  name: Yup.string().required('Required'),
+  name: Yup.string().required('Exercise name is required'),
 })
 
 function ExerciseForm({ onExerciseSet }: Props) {
@@ -28,10 +28,10 @@ function ExerciseForm({ onExerciseSet }: Props) {
           {({ values, errors, handleChange, handleSubmit, isSubmitting }) => (
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col space-y-4 max-w-md mx-auto items-center"
+              className="flex flex-col space-y-4 max-w-md items-center mx-4"
             >
               <input
-                className="w-full"
+                className="w-full border-slate-200 rounded-md"
                 type="text"
                 placeholder="Exercise name"
                 name="name"
