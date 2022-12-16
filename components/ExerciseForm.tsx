@@ -1,10 +1,14 @@
 import { Formik } from 'formik'
 import Button from './Button'
 import { setExercise } from '../api/exercises'
-
+import * as Yup from 'yup'
 type Props = {
   onExerciseSet: () => void
 }
+
+const ExerciseSchema = Yup.object().shape({
+  name: Yup.string().required('Required'),
+})
 
 function ExerciseForm({ onExerciseSet }: Props) {
   return (
@@ -16,11 +20,7 @@ function ExerciseForm({ onExerciseSet }: Props) {
       <section className="form">
         <Formik
           initialValues={{ name: '' }}
-          validate={(values) => {
-            const errors = {}
-
-            return errors
-          }}
+          validationSchema={ExerciseSchema}
           onSubmit={(values, { setSubmitting }) => {
             setExercise(values, onExerciseSet, setSubmitting)
           }}
@@ -38,6 +38,7 @@ function ExerciseForm({ onExerciseSet }: Props) {
                 onChange={handleChange}
                 value={values.name}
               />
+              {errors.name && <p className="text-red-600">{errors.name}</p>}
               <Button
                 loading={isSubmitting}
                 type="submit"

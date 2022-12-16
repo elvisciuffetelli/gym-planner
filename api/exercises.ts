@@ -34,3 +34,13 @@ export function deleteExercise(id: string, onExerciseDeleted: () => void) {
       throw new Error('Si è verificato un errore, riprova')
     })
 }
+
+export function editExercise(id: string, body, onExerciseEdited: () => void) {
+  request('put', `/api/exercises/${id}`, body)
+    .then((res) => {
+      onExerciseEdited()
+    })
+    .catch(() => {
+      throw new Error('Si è verificato un errore, riprova')
+    })
+}

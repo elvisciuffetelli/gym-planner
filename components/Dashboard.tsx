@@ -32,6 +32,7 @@ function Dashboard() {
                 key={exercise._id}
                 exercise={exercise}
                 onExerciseDeleted={() => mutate()}
+                onExerciseEdited={() => mutate()}
               />
             ))}
           </div>

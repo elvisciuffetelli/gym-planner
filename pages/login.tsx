@@ -47,7 +47,9 @@ function Login() {
                 onChange={handleChange}
                 value={values.email}
               />
-              {errors.email && touched.email && errors.email}
+              {errors.email && touched.email && (
+                <p className="text-red-600">{errors.email}</p>
+              )}
               <input
                 type="password"
                 name="password"
@@ -55,7 +57,9 @@ function Login() {
                 onChange={handleChange}
                 value={values.password}
               />
-              {errors.password && touched.password && errors.password}
+              {errors.password && touched.password && (
+                <p className="text-red-600">{errors.password}</p>
+              )}
               <Button type="submit" disabled={isSubmitting}>
                 Login
               </Button>
