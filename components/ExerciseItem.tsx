@@ -40,7 +40,6 @@ function ExerciseItem({
         <Formik
           initialValues={{ sets: 0, reps: 0, weight: 0 }}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values)
             editExercise(exercise._id, values, onExerciseEdited)
           }}
         >

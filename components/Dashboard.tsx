@@ -7,12 +7,8 @@ import ExerciseItem from './ExerciseItem'
 
 function Dashboard() {
   const { user } = useAuthentication({ redirectTo: '/login' })
-  console.log({ user })
   const { data, error, isLoading, mutate } = useGetExercise()
 
-  useEffect(() => {
-    console.log({ dataInEffect: data })
-  }, [data])
   if (!user) return <></>
 
   return (
