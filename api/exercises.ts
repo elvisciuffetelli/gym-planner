@@ -35,7 +35,11 @@ export function deleteExercise(id: string, onExerciseDeleted: () => void) {
     })
 }
 
-export function editExercise(id: string, body, onExerciseEdited: () => void) {
+export function editExercise(
+  id: string,
+  body: { sets: number; reps: number; weight: number },
+  onExerciseEdited: () => void
+) {
   request('put', `/api/exercises/${id}`, body)
     .then((res) => {
       onExerciseEdited()
