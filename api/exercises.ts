@@ -2,13 +2,16 @@ import useSWR from 'swr'
 import { Exercise } from '../types'
 import request from "./request"
 
-export function setExercise(body: {name: string}, onExerciseSet: () => void) {
+export function setExercise(body: {name: string}, onExerciseSet: () => void, setSubmitting: (isSubmitting: boolean) => void) {
     request<Exercise>('post', `/api/exercises`, body)
     .then(res => {
         if (res.name) onExerciseSet()
     })
     .catch(() => {
         throw new Error('Si è verificato un errore, riprova')
+    })
+    .finally(() => {
+        setSubmitting(false)
     })
 }
 

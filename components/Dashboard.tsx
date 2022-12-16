@@ -18,7 +18,7 @@ function Dashboard() {
 
   return (
     <>
-      <section className=''>
+      <section className='py-2 px-4 text-center'>
         <h1>Welcome {user?.name}</h1>
         <p>Exercise Dashboard</p>
       </section>

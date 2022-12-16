@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useAuthentication } from '../customHooks/useAuthentication';
 import { deleteCookie } from '../utils';
 import { useRouter } from 'next/router';
+import {FaHome} from 'react-icons/fa'
 
 function Header() {
   const router = useRouter();
@@ -13,9 +14,9 @@ function Header() {
   }
 
   return (
-    <header className=''>
+    <header className='flex justify-between shadow-md'>
       <div className=''>
-        <Link href='/'>ExerciseSetter</Link>
+        <Link href='/'><FaHome /></Link>
       </div>
       <ul className='flex space-x-6'>
         {user ? (

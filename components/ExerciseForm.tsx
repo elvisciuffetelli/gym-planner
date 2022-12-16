@@ -10,11 +10,8 @@ function ExerciseForm({onExerciseSet}: Props) {
 
   return (
     <>
-      <section className='heading'>
-        <h1>
-           Login
-        </h1>
-        <p>Login and start setting exercises</p>
+      <section className='text-center	'>
+        <p>Set an exercise</p>
       </section>
 
       <section className='form'>
@@ -26,9 +23,7 @@ function ExerciseForm({onExerciseSet}: Props) {
             return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-            console.log(values)
-            setExercise(values, onExerciseSet)
-            setSubmitting(false); //move in callback
+            setExercise(values, onExerciseSet, setSubmitting)
         }}
         >
         {({
@@ -38,15 +33,22 @@ function ExerciseForm({onExerciseSet}: Props) {
             handleSubmit,
             isSubmitting,
         }) => (
-            <form onSubmit={handleSubmit} className="flex flex-col space-y-4 max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="flex flex-col space-y-4 max-w-md mx-auto items-center">
                 <input
+                    className='w-full'
                     type="text"
                     placeholder='Exercise name'
                     name="name"
                     onChange={handleChange}
                     value={values.name}
                 />
-                <Button type="submit" disabled={isSubmitting}>
+                <Button 
+                    loading={isSubmitting} 
+                    type="submit" 
+                    color="primary" 
+                    disabled={isSubmitting}
+                    className="w-48"
+                >
                     Submit
                 </Button>
             </form>
