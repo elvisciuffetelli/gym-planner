@@ -1,15 +1,9 @@
-import Header from "./Header";
-
 type Props = {
   children: React.ReactNode;
 };
 
 const Layout = ({ children }: Props) => {
-  return (
-      <div className="container mx-auto">
-        <Header />
-        {children}
-      </div>
-  );}
+  return <div className="container mx-auto">{children}</div>;
+};
 
-export default Layout
+export default Layout;

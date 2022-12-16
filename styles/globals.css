@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body,main, html {
+body,
+main,
+html {
   width: 100%;
   height: 100%;
 }
@@ -31,7 +33,12 @@ h6 {
   @apply lg:text-base text-sm;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   @apply font-semibold;
 }
 
