@@ -4,6 +4,7 @@ import Button from './Button'
 import { FaMinus, FaEdit } from 'react-icons/fa'
 import { useState } from 'react'
 import { Formik } from 'formik'
+import Spinner from './Spinner'
 
 type Props = {
   exercise: Exercise
@@ -17,6 +18,11 @@ function ExerciseItem({
   onExerciseEdited,
 }: Props) {
   const [editMode, setEditMode] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <div className="flex flex-col bg-slate-100 shadow-md mx-2 my-6 rounded">
@@ -29,7 +35,7 @@ function ExerciseItem({
           roundedFull
           size="small"
           onClick={() => {
-            deleteExercise(exercise._id, onExerciseDeleted)
+            deleteExercise(exercise._id, onExerciseDeleted, setIsLoading)
           }}
         >
           <FaMinus />
@@ -40,7 +46,8 @@ function ExerciseItem({
         <Formik
           initialValues={{ sets: 0, reps: 0, weight: 0 }}
           onSubmit={(values, { setSubmitting }) => {
-            editExercise(exercise._id, values, onExerciseEdited)
+            setIsLoading(true)
+            editExercise(exercise._id, values, onExerciseEdited, setSubmitting)
           }}
         >
           {({
@@ -101,6 +108,7 @@ function ExerciseItem({
                 className="w-[30px] h-[30px] flex justify-center items-center self-end"
                 noShadow
                 roundedFull
+                loading={isSubmitting}
                 size="small"
                 onClick={() => {
                   setEditMode(!editMode)

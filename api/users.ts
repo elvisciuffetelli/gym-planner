@@ -25,14 +25,17 @@ export function register(body: {
   name: string
   email: string
   password: string
-}) {
+},  setSubmitting: (isSubmitting: boolean) => void) {
   request('post', `/api/users`, body)
     .then((res) => {
       if (res) {
         redirect('/login')
       }
     })
-    .catch(() => {
-      throw new Error('Si è verificato un errore, riprova')
+    .catch(({error}) => {
+      showToast(error, 'error')
+    })
+    .finally(() => {
+      setSubmitting(false)
     })
 }

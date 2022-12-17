@@ -28,8 +28,7 @@ function Register() {
           initialValues={{ name: '', email: '', password: '' }}
           validationSchema={SignupSchema}
           onSubmit={(values, { setSubmitting }) => {
-            register(values)
-            setSubmitting(false) //move in callback
+            register(values, setSubmitting)
           }}
         >
           {({

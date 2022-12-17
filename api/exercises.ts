@@ -1,5 +1,6 @@
 import useSWR from 'swr'
 import { Exercise } from '../types'
+import { showToast } from '../utils'
 import request from './request'
 
 export function setExercise(
@@ -11,8 +12,8 @@ export function setExercise(
     .then((res) => {
       if (res.name) onExerciseSet()
     })
-    .catch(() => {
-      throw new Error('Si è verificato un errore, riprova')
+    .catch(({ error }) => {
+      showToast(error, 'error')
     })
     .finally(() => {
       setSubmitting(false)
@@ -25,26 +26,37 @@ export function useGetExercise() {
   return { error, isLoading, data, mutate }
 }
 
-export function deleteExercise(id: string, onExerciseDeleted: () => void) {
+export function deleteExercise(
+  id: string,
+  onExerciseDeleted: () => void,
+  setIsLoading: (isLoading: boolean) => void
+) {
   request('delete', `/api/exercises/${id}`)
     .then((res) => {
       onExerciseDeleted()
     })
-    .catch(() => {
-      throw new Error('Si è verificato un errore, riprova')
+    .catch(({ error }) => {
+      showToast(error, 'error')
+    })
+    .finally(() => {
+      setIsLoading(false)
     })
 }
 
 export function editExercise(
   id: string,
   body: { sets: number; reps: number; weight: number },
-  onExerciseEdited: () => void
+  onExerciseEdited: () => void,
+  setSubmitting: (isSubmitting: boolean) => void
 ) {
   request('put', `/api/exercises/${id}`, body)
     .then((res) => {
       onExerciseEdited()
     })
-    .catch(() => {
-      throw new Error('Si è verificato un errore, riprova')
+    .catch(({ error }) => {
+      showToast(error, 'error')
+    })
+    .finally(() => {
+      setSubmitting(false)
     })
 }
