@@ -9,9 +9,6 @@ export function setCookie(
   value: any,
   options?: CookieSetOptions
 ) {
-  const expires = new Date()
-  expires.setTime(expires.getTime() + 3600000 * 24)
-
   new Cookies().set(
     name,
     typeof value === 'object' ? JSON.stringify(value) : value,
@@ -19,7 +16,6 @@ export function setCookie(
       ...options,
       /*       domain: isClient ? window.location.hostname : undefined,
         path: '/', */
-      expires,
     }
   )
 }

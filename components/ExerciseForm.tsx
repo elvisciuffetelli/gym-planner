@@ -28,7 +28,7 @@ function ExerciseForm({ onExerciseSet }: Props) {
           {({ values, errors, handleChange, handleSubmit, isSubmitting }) => (
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col space-y-4 max-w-md items-center mx-4"
+              className="flex flex-col space-y-4 max-w-md items-center mx-auto"
             >
               <input
                 className="w-full border-slate-200 rounded-md"

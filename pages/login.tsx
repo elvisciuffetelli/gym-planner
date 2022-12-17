@@ -14,7 +14,7 @@ const LoginSchema = Yup.object().shape({
 function Login() {
   return (
     <>
-      <section className="heading">
+      <section className="text-center p-4">
         <h1>Login</h1>
         <p>Login and start setting exercises</p>
       </section>
@@ -37,7 +37,7 @@ function Login() {
           }) => (
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col space-y-4 max-w-md mx-auto"
+              className="flex flex-col space-y-4 max-w-md mx-auto items-center"
             >
               <input
                 className="w-full border-slate-200 rounded-md"

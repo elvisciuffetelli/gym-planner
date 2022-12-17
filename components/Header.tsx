@@ -14,28 +14,26 @@ function Header() {
   }
 
   return (
-    <header className="flex justify-between shadow-md">
-      <div className="">
-        <Link href="/">
-          <FaHome />
-        </Link>
-      </div>
+    <header className="flex justify-between shadow-md py-4 px-2">
+      <Link href="/" className='flex items-center'>
+        <FaHome />
+      </Link>
       <ul className="flex space-x-6">
         {user ? (
           <li>
-            <button className="btn" onClick={onLogout}>
+            <button className="flex items-center" onClick={onLogout}>
               <FaSignOutAlt /> Logout
             </button>
           </li>
         ) : (
           <>
             <li>
-              <Link href="/login" className="flex">
+              <Link href="/login" className="flex items-center">
                 <FaSignInAlt /> Login
               </Link>
             </li>
             <li>
-              <Link href="/register" className="flex">
+              <Link href="/register" className="flex items-center">
                 <FaUser /> Register
               </Link>
             </li>
