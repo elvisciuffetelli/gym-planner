@@ -35,6 +35,7 @@ function ExerciseItem({
           roundedFull
           size="small"
           onClick={() => {
+            setIsLoading(true)
             deleteExercise(exercise._id, onExerciseDeleted, setIsLoading)
           }}
         >
@@ -46,7 +47,6 @@ function ExerciseItem({
         <Formik
           initialValues={{ sets: 0, reps: 0, weight: 0 }}
           onSubmit={(values, { setSubmitting }) => {
-            setIsLoading(true)
             editExercise(exercise._id, values, onExerciseEdited, setSubmitting)
           }}
         >
