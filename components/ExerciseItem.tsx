@@ -68,18 +68,19 @@ function ExerciseItem({
               className="flex justify-between py-4 px-2"
             >
               {editMode ? (
-                <div className="flex">
-                  <FieldArray name="sets">
-                    {(arrayHelpers) => (
-                      <div>
-                        {values.sets.map((set, index) => (
-                          <div key={index}>
+                <FieldArray name="sets">
+                  {(arrayHelpers) => (
+                    <div className="flex flex-col m-auto">
+                      {values.sets.map((set, index) => (
+                        <div key={index} className="flex">
+                          <div className="pb-2 mr-3">
                             <label htmlFor={`sets.${index}.reps`}>Reps:</label>
                             <input
                               id={`sets.${index}.reps`}
                               name={`sets.${index}.reps`}
                               type="number"
                               value={set.reps}
+                              className="border-none w-12"
                               onChange={(e) =>
                                 setFieldValue(
                                   `sets.${index}.reps`,
@@ -87,6 +88,9 @@ function ExerciseItem({
                                 )
                               }
                             />
+                          </div>
+
+                          <div className="pb-2 mr-3">
                             <label htmlFor={`sets.${index}.weight`}>
                               Weight:
                             </label>
@@ -95,6 +99,7 @@ function ExerciseItem({
                               name={`sets.${index}.weight`}
                               type="number"
                               value={set.weight}
+                              className="border-none w-14"
                               onChange={(e) =>
                                 setFieldValue(
                                   `sets.${index}.weight`,
@@ -102,12 +107,13 @@ function ExerciseItem({
                                 )
                               }
                             />
+                            <span>kg</span>
                           </div>
-                        ))}
-                      </div>
-                    )}
-                  </FieldArray>
-                </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </FieldArray>
               ) : isSubmitting ? (
                 <Spinner />
               ) : (
