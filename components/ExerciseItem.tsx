@@ -3,7 +3,7 @@ import { Exercise } from '../types'
 import Button from './Button'
 import { FaMinus, FaEdit } from 'react-icons/fa'
 import { useState } from 'react'
-import { Formik } from 'formik'
+import { Formik, FieldArray } from 'formik'
 import Spinner from './Spinner'
 
 type Props = {
@@ -20,10 +20,6 @@ function ExerciseItem({
   const [editMode, setEditMode] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  if (isLoading) {
-    return <Spinner />
-  }
-
   return (
     <div className="flex flex-col bg-slate-100 shadow-md mx-2 my-6 rounded">
       <div className="flex justify-between mb-2 pt-2 px-2">
@@ -32,6 +28,7 @@ function ExerciseItem({
           className="w-[30px] h-[30px] flex justify-center items-center	"
           color="red"
           noShadow
+          loading={isLoading}
           roundedFull
           size="small"
           onClick={() => {
@@ -45,15 +42,23 @@ function ExerciseItem({
 
       <section className="form">
         <Formik
-          initialValues={{ sets: 0, reps: 0, weight: 0 }}
+          initialValues={{
+            sets: exercise.sets,
+          }}
           onSubmit={(values, { setSubmitting }) => {
-            editExercise(exercise._id, values, onExerciseEdited, setSubmitting)
+            console.log({ values })
+            editExercise(
+              exercise._id,
+              values.sets,
+              onExerciseEdited,
+              setSubmitting
+            )
           }}
         >
           {({
             values,
+            setFieldValue,
             errors,
-            handleChange,
             handleSubmit,
             submitForm,
             isSubmitting,
@@ -64,45 +69,58 @@ function ExerciseItem({
             >
               {editMode ? (
                 <div className="flex">
-                  <div className="flex justify-between items-center	">
-                    <label htmlFor="sets">Sets:</label>
-                    <input
-                      className="w-10 focus:ring-slate-200 focus:border-slate-200 focus:shadow-outline border-none"
-                      type="number"
-                      name="sets"
-                      onChange={handleChange}
-                      value={values.sets}
-                    />
-                  </div>
-
-                  <div className="flex justify-between items-center	">
-                    <label htmlFor="reps">Reps:</label>
-                    <input
-                      className="w-12 focus:ring-slate-200 focus:border-slate-200 focus:shadow-outline border-none"
-                      type="number"
-                      name="reps"
-                      onChange={handleChange}
-                      value={values.reps}
-                    />
-                  </div>
-
-                  <div className="flex justify-between items-center	">
-                    <label htmlFor="weight">Weight:</label>
-                    <input
-                      className="w-14 focus:ring-slate-200 focus:border-slate-200 focus:shadow-outline border-none"
-                      type="number"
-                      name="weight"
-                      onChange={handleChange}
-                      value={values.weight}
-                    />
-                  </div>
+                  <FieldArray name="sets">
+                    {(arrayHelpers) => (
+                      <div>
+                        {values.sets.map((set, index) => (
+                          <div key={index}>
+                            <label htmlFor={`sets.${index}.reps`}>Reps:</label>
+                            <input
+                              id={`sets.${index}.reps`}
+                              name={`sets.${index}.reps`}
+                              type="number"
+                              value={set.reps}
+                              onChange={(e) =>
+                                setFieldValue(
+                                  `sets.${index}.reps`,
+                                  e.target.value
+                                )
+                              }
+                            />
+                            <label htmlFor={`sets.${index}.weight`}>
+                              Weight:
+                            </label>
+                            <input
+                              id={`sets.${index}.weight`}
+                              name={`sets.${index}.weight`}
+                              type="number"
+                              value={set.weight}
+                              onChange={(e) =>
+                                setFieldValue(
+                                  `sets.${index}.weight`,
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </FieldArray>
                 </div>
+              ) : isSubmitting ? (
+                <Spinner />
               ) : (
-                <>
-                  <p className="px-2 py-2">Sets: {exercise.sets}</p>
-                  <p className="px-2 py-2">Reps: {exercise.reps}</p>
-                  <p className="px-2 py-2">Weight: {exercise.weight}</p>
-                </>
+                <div>
+                  {exercise.sets.map((set) => {
+                    return (
+                      <div key={set._id} className="flex">
+                        <p className="px-2 py-2">Reps: {set.reps}</p>
+                        <p className="px-2 py-2">Weight: {set.weight} kg</p>
+                      </div>
+                    )
+                  })}
+                </div>
               )}
               <Button
                 className="w-[30px] h-[30px] flex justify-center items-center self-end"

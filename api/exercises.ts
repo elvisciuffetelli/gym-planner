@@ -1,14 +1,20 @@
 import useSWR from 'swr'
-import { Exercise } from '../types'
+import { Exercise, Set } from '../types'
 import { showToast } from '../utils'
 import request from './request'
 
 export function setExercise(
-  body: { name: string },
+  body: { name: string; setsNumber: number },
   onExerciseSet: () => void,
   setSubmitting: (isSubmitting: boolean) => void
 ) {
-  request<Exercise>('post', `/api/exercises`, body)
+  const arr = Array.from(Array(body.setsNumber).keys())
+  const sets = arr.map(() => ({ reps: 5, weight: 10 }))
+
+  request<Exercise>('post', `/api/exercises`, {
+    ...body,
+    sets,
+  })
     .then((res) => {
       if (res.name) onExerciseSet()
     })
@@ -45,11 +51,11 @@ export function deleteExercise(
 
 export function editExercise(
   id: string,
-  body: { sets: number; reps: number; weight: number },
+  sets: Set[],
   onExerciseEdited: () => void,
   setSubmitting: (isSubmitting: boolean) => void
 ) {
-  request('put', `/api/exercises/${id}`, body)
+  request('put', `/api/exercises/${id}`, { sets })
     .then((res) => {
       onExerciseEdited()
     })

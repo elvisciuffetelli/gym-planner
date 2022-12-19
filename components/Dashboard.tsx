@@ -15,7 +15,7 @@ function Dashboard() {
     <>
       <section className="py-2 px-4 text-center">
         <h1>Welcome {user?.name}</h1>
-        <p>Exercise Dashboard</p>
+        <h3 className="py-4">Exercise Dashboard</h3>
       </section>
 
       <ExerciseForm onExerciseSet={() => mutate()} />
